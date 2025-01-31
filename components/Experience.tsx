@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import { Calendar } from "lucide-react";
 
 const experiences = [
@@ -21,10 +21,14 @@ const experiences = [
   // Add more experiences
 ];
 
+const MotionDiv = motion.div as React.ComponentType<
+  MotionProps & React.HTMLAttributes<HTMLDivElement>
+>;
+
 export default function Experience() {
   return (
     <section id='experience' className='py-20 px-4 max-w-7xl mx-auto'>
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -34,12 +38,12 @@ export default function Experience() {
         <p className='text-gray-600 dark:text-gray-300'>
           My professional journey and achievements
         </p>
-      </motion.div>
+      </MotionDiv>
 
       <div className='relative'>
         <div className='absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200 dark:bg-gray-700' />
         {experiences.map((experience, index) => (
-          <motion.div
+          <MotionDiv
             key={index}
             initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -61,7 +65,7 @@ export default function Experience() {
                 {experience.description}
               </p>
             </div>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
     </section>

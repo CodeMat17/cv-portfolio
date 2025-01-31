@@ -33,7 +33,7 @@ export default function Navbar() {
             <MotionH1
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className='font-bold text-xl text-blue-700'>
+              className='font-bold text-xl text-blue-500'>
               CodeMat
             </MotionH1>
           </div>

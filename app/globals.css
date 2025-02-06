@@ -6,6 +6,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+ 
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -69,4 +74,20 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@-webkit-keyframes openCloseEnvelope {
+  0%, 100% { transform: rotateX(0deg); }  /* Closed */
+  50% { transform: rotateX(30deg); }  /* Opened */
+}
+
+@keyframes openCloseEnvelope {
+  0%, 100% { transform: rotateX(0deg); }  /* Closed */
+  50% { transform: rotateX(30deg); }  /* Opened */
+}
+
+.envelope {
+  -webkit-animation: openCloseEnvelope 1s ease-in-out infinite;
+          animation: openCloseEnvelope 1s ease-in-out infinite;
+  transform-origin: top;
 }

@@ -1,5 +1,7 @@
-import { Mail, Phone, Terminal } from "lucide-react";
+'use client'
 
+import { Mail, Phone, Terminal } from "lucide-react";
+import {motion, MotionProps} from 'framer-motion'
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,8 +13,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useEffect, useState } from "react";
+
+const MotionDiv = motion.div as React.ComponentType<
+  MotionProps & React.HTMLAttributes<HTMLDivElement>
+>;
 
 export function ContactModal() {
+  const [animate, setAnimate] = useState(false);
+  
+  useEffect(() => {
+    setAnimate(true); // Start animation when component mounts
+  }, []);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -34,17 +47,28 @@ export function ContactModal() {
             Feel free to reach out for business or collaboration.
           </DialogDescription>
         </DialogHeader>
-        <div className='flex flex-col sm:flex-row gap-4 items-start sm:items-center sm:justify-center py-8'>
+        <div className='flex flex-col sm:flex-row gap-2 items-start sm:items-center sm:justify-center py-8'>
           <Button
             variant='outline'
             asChild
             className='relative group rounded-full'>
-            <a href='tel:+2348063856120' className='flex items-center gap-4'>
-              <Phone className='absolute -top-2 left-0 h-6 w-6 text-blue-600 dark:text-blue-400 mt-1 transition-transform duration-500 group-hover:rotate-45' />
-
+            <a href='tel:+2348063856120' className='flex items-center gap-2'>
               <p className='text-gray-600 dark:text-gray-300'>
                 +234 806 385 6120
               </p>
+
+              <MotionDiv
+                className='relative'
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}>
+                <Phone
+                  className={`h-6 w-6 text-blue-600 dark:text-blue-400 transition-transform duration-500 group-hover:rotate-45`}
+                />
+              </MotionDiv>
             </a>
           </Button>
 
@@ -54,12 +78,31 @@ export function ContactModal() {
             className='relative group rounded-full'>
             <a
               href='mailto:ask@soft-lutions.com.ng'
-              className='flex items-center gap-4'>
-              <Mail className='absolute -top-2 left-0 h-6 w-6 text-blue-600 dark:text-blue-400 mt-1 transition-transform duration-500 group-hover:rotate-45' />
-
+              className='flex items-center gap-2'>
               <p className='text-gray-600 dark:text-gray-300'>
                 ask@soft-lutions.com.ng
               </p>
+
+              {/* <MotionDiv
+                className='relative'
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}>
+                <Mail
+                  className={`h-6 w-6 text-blue-600 dark:text-blue-400 transition-transform duration-500 group-hover:rotate-45 ${
+                    animate ? "envelope" : ""
+                  }`}
+                />
+              </MotionDiv> */}
+
+              <Mail
+                className={`h-6 w-6 text-blue-600 dark:text-blue-400 transition-transform duration-500 group-hover:rotate-45 ${
+                  animate ? "envelope" : ""
+                }`}
+              />
             </a>
           </Button>
         </div>
